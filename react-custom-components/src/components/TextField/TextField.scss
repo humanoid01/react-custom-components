@@ -1,8 +1,41 @@
 .text-field {
   position: relative;
+  display: inline-flex;
+
+  /* colors */
+
+  .primary {
+    color: #90caf9;
+    border-color: #90caf9;
+  }
+
+  .secondary {
+    color: '#ce93d8';
+    border-color: '#ce93d8';
+  }
+
+  .error {
+    color: '#f44336';
+    border-color: '#f44336';
+  }
+  .info {
+    color: '#29b6f6';
+    border-color: '#29b6f6';
+  }
+  .success {
+    color: '#66bb6a';
+    border-color: '#66bb6a';
+  }
+  .warning {
+    color: '#ffa726';
+    border-color: '#ffa726';
+  }
+
+  /* elements */
 
   input {
-    padding: 8px;
+    padding: 10px;
+    outline: none;
   }
 
   label {
@@ -11,26 +44,50 @@
     top: 12px;
     font-size: 16px;
     color: #777;
-    transition: transform 0.2s ease-out;
+    padding: 3px;
+    background-color: inherit;
+    color: inherit;
+    transition: transform 0.2s ease-out, font-size 0.3s ease-out;
+    border-radius: 4px;
+    pointer-events: none;
   }
 
   &.active input:focus + label {
-    transform: translateY(-20px);
+    transform: translateY(-28px);
     font-size: 12px;
-    color: #333;
+    color: inherit;
+    border-color: inherit;
+    outline: none;
   }
+
   input:not(:focus)::placeholder {
     color: transparent;
   }
 
+  /* variants */
+
   .standard {
     border: none;
-    outline: none;
     border-bottom: 1px solid;
     border-color: inherit;
 
     &:hover {
       border-bottom: 2px solid;
+      border-color: inherit;
     }
+  }
+
+  .outlined {
+    border: 1px solid;
+    border-radius: 8px;
+    line-height: 28px;
+    border-color: inherit;
+  }
+
+  .filled {
+    border-radius: 10px 10px 0 0;
+    border: 1px solid;
+    border-color: inherit;
+    background-color: rgba($color: #000000, $alpha: 0.09);
   }
 }

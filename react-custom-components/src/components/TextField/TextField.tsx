@@ -6,7 +6,7 @@ interface TextFieldProps {
   disabled?: boolean;
   placeholder?: string;
   required?: boolean;
-  size?: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium';
   variant?: 'filled' | 'outlined' | 'standard';
   color?:
     | 'primary'
@@ -76,12 +76,23 @@ export const TextField = ({
     }
   };
 
+  const handleSize = (size: 'small' | 'medium' | undefined) => {
+    switch (size) {
+      case 'small':
+        return 'small';
+      case 'medium':
+        return 'medium';
+      default:
+        return 'medium';
+    }
+  };
+
   return (
     <div className={`text-field ${isFocused || value ? 'active' : ''}`}>
-      <div className={handleColor(color)}>
+      <div className={`${handleColor(color)}`}>
         <input
           type='text'
-          className={handleVariant(variant)}
+          className={`${handleVariant(variant)} ${handleSize(size)}`}
           value={value}
           onChange={onChange}
           onFocus={handleFocus}
@@ -90,7 +101,12 @@ export const TextField = ({
           disabled={disabled}
           required={required}
         />
-        <label>Label</label>
+        <label
+          className={
+            handleVariant(variant) === 'outlined' ? 'label-center' : ''
+          }>
+          Label
+        </label>
       </div>
     </div>
   );

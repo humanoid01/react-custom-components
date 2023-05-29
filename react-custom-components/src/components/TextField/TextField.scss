@@ -1,0 +1,36 @@
+.text-field {
+  position: relative;
+
+  input {
+    padding: 8px;
+  }
+
+  label {
+    position: absolute;
+    left: 8px;
+    top: 12px;
+    font-size: 16px;
+    color: #777;
+    transition: transform 0.2s ease-out;
+  }
+
+  &.active input:focus + label {
+    transform: translateY(-20px);
+    font-size: 12px;
+    color: #333;
+  }
+  input:not(:focus)::placeholder {
+    color: transparent;
+  }
+
+  .standard {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid;
+    border-color: inherit;
+
+    &:hover {
+      border-bottom: 2px solid;
+    }
+  }
+}

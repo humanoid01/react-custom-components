@@ -16,6 +16,10 @@ interface TextFieldProps {
     | 'success'
     | 'warning'
     | string;
+  helperText?: string;
+  label?: string;
+  type?: string;
+  autoFocus?: boolean;
 }
 
 export const TextField = ({
@@ -27,6 +31,10 @@ export const TextField = ({
   required,
   variant,
   color,
+  helperText,
+  label,
+  type,
+  autoFocus,
 }: TextFieldProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -91,22 +99,24 @@ export const TextField = ({
     <div className={`text-field ${isFocused || value ? 'active' : ''}`}>
       <div className={`${handleColor(color)}`}>
         <input
-          type='text'
+          type={type ? type : 'text'}
           className={`${handleVariant(variant)} ${handleSize(size)}`}
-          value={value}
+          value={value ? value : ''}
           onChange={onChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
           disabled={disabled}
           required={required}
+          autoFocus={autoFocus}
         />
         <label
           className={
             handleVariant(variant) === 'outlined' ? 'label-center' : ''
           }>
-          Label
+          {label}
         </label>
+        <label className='label-help'> {helperText} </label>
       </div>
     </div>
   );

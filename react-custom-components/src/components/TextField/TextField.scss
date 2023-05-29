@@ -44,7 +44,6 @@
     bottom: 10%;
     font-size: 16px;
     padding: 3px;
-    color: #777;
     background-color: inherit;
     color: inherit;
     transition: transform 0.2s ease-out, font-size 0.3s ease-out;
@@ -68,24 +67,22 @@
 
   .standard {
     border: none;
+    padding-top: 10px !important;
     border-bottom: 1px solid;
     border-color: inherit;
 
     &:hover {
-      border-bottom: 2px solid;
-      border-color: inherit;
+      filter: brightness(110%);
     }
   }
 
   .outlined {
     border: 1px solid;
     border-radius: 8px;
-    line-height: 28px;
     border-color: inherit;
-  }
-
-  .label-center {
-    bottom: 23%;
+    &:hover {
+      filter: brightness(110%);
+    }
   }
 
   .filled {
@@ -93,12 +90,22 @@
     border: 1px solid;
     border-color: inherit;
     background-color: rgba($color: #000000, $alpha: 0.09);
+    &:hover {
+      filter: brightness(110%);
+    }
   }
-  /*sizes*/
+
+  /* sizes */
   .small {
     padding: 7px 10px;
   }
   .medium {
     padding: 9px 13px;
+  }
+
+  /* other */
+
+  .label-help {
+    bottom: -65%;
   }
 }

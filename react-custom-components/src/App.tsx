@@ -10,17 +10,23 @@ function App() {
         onChange={e => setText(e.target.value)}
         variant='filled'
         size='medium'
+        label='Great label'
+        helperText={'Please provide something'}
       />
       <TextField
         value={text}
         onChange={e => setText(e.target.value)}
         size='medium'
+        label='Great label'
+        helperText={'Please provide something'}
       />
       <TextField
         value={text}
         onChange={e => setText(e.target.value)}
         variant='outlined'
         size='medium'
+        label='Cool label'
+        helperText={'Please provide something'}
       />
     </div>
   );

@@ -5,6 +5,7 @@ import { AiFillAlert } from 'react-icons/ai';
 
 function App() {
   const [text, setText] = useState('');
+  const [text2, setText2] = useState('');
   const style = { height: '100px', padding: '10px' };
   return (
     <div style={style}>
@@ -15,20 +16,20 @@ function App() {
         size='medium'
         label='Great label'
         helperText={'Please provide something'}
-        color='success'
+        color='#333'
         startIcon={<AiFillEyeInvisible />}
         endIcon={<AiFillAlert />}
       />
       <TextField
-        value={text}
-        onChange={e => setText(e.target.value)}
+        value={text2}
+        onChange={e => setText2(e.target.value)}
         size='medium'
         label='Great label'
         helperText={'Please provide something'}
         startIcon={<AiFillEyeInvisible />}
         endIcon={<AiFillAlert />}
         placeholder='type something'
-        color='info'
+        color='red'
       />
       <TextField
         value={text}
@@ -36,7 +37,7 @@ function App() {
         variant='outlined'
         size='medium'
         label='Cool label'
-        color='warning'
+        color='success'
         helperText={'Please provide something'}
         startIcon={<AiFillEyeInvisible />}
         endIcon={<AiFillAlert />}

@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from 'react';
-import './TextField.scss';
-
+import textField from './TextField.module.scss';
+import { ColorType } from '../../types/types';
+import { useId } from 'react';
 interface TextFieldProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -9,14 +10,7 @@ interface TextFieldProps {
   required?: boolean;
   size?: 'small' | 'medium';
   variant?: 'filled' | 'outlined' | 'standard';
-  color?:
-    | 'primary'
-    | 'secondary'
-    | 'error'
-    | 'info'
-    | 'success'
-    | 'warning'
-    | string;
+  color?: ColorType | string;
   helperText?: string;
   label?: string;
   type?: string;
@@ -24,6 +18,10 @@ interface TextFieldProps {
   startIcon?: ReactNode;
   endIcon?: ReactNode;
   counter?: number;
+  onFocus?: (e?: React.FocusEvent<HTMLElement>) => void;
+  onBlur?: (e?: React.FocusEvent<HTMLElement>) => void;
+  className?: string;
+  id?: string;
 }
 
 export const TextField = ({
@@ -42,46 +40,41 @@ export const TextField = ({
   startIcon,
   endIcon,
   counter,
+  onFocus,
+  onBlur,
+  className,
+  id,
 }: TextFieldProps) => {
-  const [isFocused, setIsFocused] = useState(false);
   const [textCounter, setTextCounter] = useState(0);
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
-  const handleCounter = (text: string) => {
-    if (counter) {
-      if (text.length > counter) {
-        setTextCounter(counter);
-      }
-    }
-  };
+  const textInputId = useId();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    handleCounter(inputValue);
-
-    if (counter && inputValue.length > counter) {
-      e.target.value = inputValue.substring(0, counter);
-      setTextCounter(counter);
-    } else {
+    if (counter && inputValue.length <= counter) {
       setTextCounter(inputValue.length);
+      onChange?.(e);
     }
-
-    onChange && onChange(e);
+    if (!counter) {
+      onChange?.(e);
+    }
   };
 
   const handleVariant = (
     variant: 'filled' | 'outlined' | 'standard' | undefined
   ) => {
-    if (variant === 'filled') return 'filled';
-    if (variant === 'outlined') return 'outlined';
-    return 'standard';
+    if (variant === 'filled') return textField.filled;
+    if (variant === 'outlined') return textField.outlined;
+    return textField.standard;
+  };
+
+  const handleSize = (size: 'small' | 'medium' | undefined) => {
+    switch (size) {
+      case 'small':
+        return textField.small;
+      case 'medium':
+      default:
+        return textField.medium;
+    }
   };
 
   const handleColor = (
@@ -97,72 +90,80 @@ export const TextField = ({
   ): string => {
     switch (color) {
       case 'secondary':
-        return 'secondary';
+        return textField.secondary;
       case 'error':
-        return 'error';
+        return textField.error;
       case 'info':
-        return 'info';
+        return textField.info;
       case 'success':
-        return 'success';
+        return textField.success;
       case 'warning':
-        return 'warning';
+        return textField.warning;
       case 'primary':
-        return 'primary';
-
       default:
-        return 'primary';
+        return textField.primary;
     }
   };
 
-  const handleSize = (size: 'small' | 'medium' | undefined) => {
-    switch (size) {
-      case 'small':
-        return 'small';
-      case 'medium':
-        return 'medium';
-      default:
-        return 'medium';
-    }
+  const handleCustomColor = (
+    color: string | undefined
+  ): {} | { color: string } => {
+    if (!color) return {};
+
+    const nonCustomColors = {
+      primary: true,
+      secondary: true,
+      error: true,
+      info: true,
+      success: true,
+      warning: true,
+    };
+
+    if (!(color in nonCustomColors))
+      return { color: color, borderColor: color };
+
+    return {};
   };
 
-  const inputStyles = {
-    paddingLeft: startIcon ? '32px' : '',
-    paddingRight: endIcon ? '32px' : '',
-  };
   return (
-    <div className={`text-field ${isFocused || value ? 'active' : ''}`}>
-      <div className={`${handleColor(color)}`}>
-        {startIcon && <div className='start-icon'>{startIcon}</div>}
-        {endIcon && <div className='end-icon'>{endIcon}</div>}
+    <div
+      className={`${textField.textField} ${value ? textField.active : ''} ${
+        className ?? ''
+      }`}>
+      <div className={handleColor(color)} style={handleCustomColor(color)}>
+        {startIcon && <div className={textField.startIcon}>{startIcon}</div>}
+        {endIcon && <div className={textField.endIcon}>{endIcon}</div>}
+
         <input
-          type={type ? type : 'text'}
-          className={`${handleVariant(variant)} ${handleSize(size)}`}
-          value={value ? value : ''}
-          style={inputStyles}
+          type={type ?? 'text'}
+          className={`${handleVariant(variant)} ${handleSize(size)} ${
+            startIcon ? textField.hasStartIcon : ''
+          } ${endIcon ? textField.hasEndIcon : ''}`}
+          value={value ?? ''}
           onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
+          onFocus={onFocus}
+          onBlur={onBlur}
           placeholder={placeholder}
           disabled={disabled}
           required={required}
           autoFocus={autoFocus}
+          id={id ?? textInputId}
         />
+
         <label
-          className={`
-            ${handleVariant(variant) === 'outlined' ? 'label-center' : ''} ${
-            startIcon ? 'label-start' : ''
-          } 
-          `}>
+          htmlFor={id ?? textInputId}
+          className={`${startIcon ? textField.start : ''}`}>
           {label}
         </label>
-        <label className='label-help'> {helperText} </label>
-        {counter ? (
-          <label className='label-counter'>
-            {textCounter}/{counter}
-          </label>
-        ) : (
-          ''
-        )}
+
+        <div className={textField.flexRow}>
+          <div> {helperText} </div>
+          {counter && counter > 0 && (
+            <div>
+              {textCounter}/{counter}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

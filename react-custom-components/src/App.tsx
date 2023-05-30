@@ -40,6 +40,7 @@ function App() {
         helperText={'Please provide something'}
         startIcon={<AiFillEyeInvisible />}
         endIcon={<AiFillAlert />}
+        counter={20}
       />
     </div>
   );

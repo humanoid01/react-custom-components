@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
-
 import './TextField.scss';
+
 interface TextFieldProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -23,6 +23,7 @@ interface TextFieldProps {
   autoFocus?: boolean;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
+  counter?: number;
 }
 
 export const TextField = ({
@@ -40,8 +41,10 @@ export const TextField = ({
   autoFocus,
   startIcon,
   endIcon,
+  counter,
 }: TextFieldProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [textCounter, setTextCounter] = useState(0);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -49,6 +52,28 @@ export const TextField = ({
 
   const handleBlur = () => {
     setIsFocused(false);
+  };
+
+  const handleCounter = (text: string) => {
+    if (counter) {
+      if (text.length > counter) {
+        setTextCounter(counter);
+      }
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    handleCounter(inputValue);
+
+    if (counter && inputValue.length > counter) {
+      e.target.value = inputValue.substring(0, counter);
+      setTextCounter(counter);
+    } else {
+      setTextCounter(inputValue.length);
+    }
+
+    onChange && onChange(e);
   };
 
   const handleVariant = (
@@ -104,7 +129,6 @@ export const TextField = ({
     paddingLeft: startIcon ? '32px' : '',
     paddingRight: endIcon ? '32px' : '',
   };
-
   return (
     <div className={`text-field ${isFocused || value ? 'active' : ''}`}>
       <div className={`${handleColor(color)}`}>
@@ -115,7 +139,7 @@ export const TextField = ({
           className={`${handleVariant(variant)} ${handleSize(size)}`}
           value={value ? value : ''}
           style={inputStyles}
-          onChange={onChange}
+          onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
@@ -132,6 +156,13 @@ export const TextField = ({
           {label}
         </label>
         <label className='label-help'> {helperText} </label>
+        {counter ? (
+          <label className='label-counter'>
+            {textCounter}/{counter}
+          </label>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

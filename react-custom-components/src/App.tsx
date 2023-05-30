@@ -1,5 +1,8 @@
 import { TextField } from './components/TextField/TextField';
 import { useState } from 'react';
+import { AiFillEyeInvisible } from 'react-icons/ai';
+import { AiFillAlert } from 'react-icons/ai';
+
 function App() {
   const [text, setText] = useState('');
   const style = { height: '100px', padding: '10px' };
@@ -12,6 +15,9 @@ function App() {
         size='medium'
         label='Great label'
         helperText={'Please provide something'}
+        color='success'
+        startIcon={<AiFillEyeInvisible />}
+        endIcon={<AiFillAlert />}
       />
       <TextField
         value={text}
@@ -19,6 +25,10 @@ function App() {
         size='medium'
         label='Great label'
         helperText={'Please provide something'}
+        startIcon={<AiFillEyeInvisible />}
+        endIcon={<AiFillAlert />}
+        placeholder='type something'
+        color='info'
       />
       <TextField
         value={text}
@@ -26,7 +36,10 @@ function App() {
         variant='outlined'
         size='medium'
         label='Cool label'
+        color='warning'
         helperText={'Please provide something'}
+        startIcon={<AiFillEyeInvisible />}
+        endIcon={<AiFillAlert />}
       />
     </div>
   );

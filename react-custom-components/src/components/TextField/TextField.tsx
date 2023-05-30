@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
+
 import './TextField.scss';
 interface TextFieldProps {
   value?: string;
@@ -20,6 +21,8 @@ interface TextFieldProps {
   label?: string;
   type?: string;
   autoFocus?: boolean;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
 }
 
 export const TextField = ({
@@ -35,6 +38,8 @@ export const TextField = ({
   label,
   type,
   autoFocus,
+  startIcon,
+  endIcon,
 }: TextFieldProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -95,13 +100,21 @@ export const TextField = ({
     }
   };
 
+  const inputStyles = {
+    paddingLeft: startIcon ? '32px' : '',
+    paddingRight: endIcon ? '32px' : '',
+  };
+
   return (
     <div className={`text-field ${isFocused || value ? 'active' : ''}`}>
       <div className={`${handleColor(color)}`}>
+        {startIcon && <div className='start-icon'>{startIcon}</div>}
+        {endIcon && <div className='end-icon'>{endIcon}</div>}
         <input
           type={type ? type : 'text'}
           className={`${handleVariant(variant)} ${handleSize(size)}`}
           value={value ? value : ''}
+          style={inputStyles}
           onChange={onChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -111,9 +124,11 @@ export const TextField = ({
           autoFocus={autoFocus}
         />
         <label
-          className={
-            handleVariant(variant) === 'outlined' ? 'label-center' : ''
-          }>
+          className={`
+            ${handleVariant(variant) === 'outlined' ? 'label-center' : ''} ${
+            startIcon ? 'label-start' : ''
+          } 
+          `}>
           {label}
         </label>
         <label className='label-help'> {helperText} </label>

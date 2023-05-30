@@ -10,25 +10,25 @@
   }
 
   .secondary {
-    color: '#ce93d8';
-    border-color: '#ce93d8';
+    color: #ce93d8;
+    border-color: #ce93d8;
   }
 
   .error {
-    color: '#f44336';
-    border-color: '#f44336';
+    color: #f44336;
+    border-color: #f44336;
   }
   .info {
-    color: '#29b6f6';
-    border-color: '#29b6f6';
+    color: #29b6f6;
+    border-color: #29b6f6;
   }
   .success {
-    color: '#66bb6a';
-    border-color: '#66bb6a';
+    color: #66bb6a;
+    border-color: #66bb6a;
   }
   .warning {
-    color: '#ffa726';
-    border-color: '#ffa726';
+    color: #ffa726;
+    border-color: #ffa726;
   }
 
   /* elements */
@@ -70,9 +70,10 @@
     padding-top: 10px !important;
     border-bottom: 1px solid;
     border-color: inherit;
+    border-radius: 10px 10px 0 0;
 
     &:hover {
-      filter: brightness(110%);
+      background-color: rgba(0, 0, 0, 0.05);
     }
   }
 
@@ -81,7 +82,7 @@
     border-radius: 8px;
     border-color: inherit;
     &:hover {
-      filter: brightness(110%);
+      background-color: rgba(0, 0, 0, 0.05);
     }
   }
 
@@ -91,7 +92,7 @@
     border-color: inherit;
     background-color: rgba($color: #000000, $alpha: 0.09);
     &:hover {
-      filter: brightness(110%);
+      background-color: rgba(0, 0, 0, 0.05);
     }
   }
 
@@ -107,5 +108,22 @@
 
   .label-help {
     bottom: -65%;
+  }
+
+  .label-start {
+    left: 15%;
+  }
+
+  /* icons */
+  .start-icon {
+    position: absolute;
+    bottom: 11%;
+    left: 5%;
+  }
+
+  .end-icon {
+    position: absolute;
+    bottom: 11%;
+    right: 5%;
   }
 }

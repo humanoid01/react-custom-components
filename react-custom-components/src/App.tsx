@@ -10,9 +10,14 @@ function App() {
   const style = { height: '100px', padding: '10px' };
   return (
     <div style={style}>
-      <Button />
-      <Button endIcon={<AiFillAlert />} startIcon={<AiFillEyeInvisible />} />
-      <Button />
+      <Button variant='contained' color='primaryDark' />
+      <Button
+        endIcon={<AiFillAlert />}
+        startIcon={<AiFillEyeInvisible />}
+        variant='outlined'
+        color='red'
+      />
+      <Button variant='text' color='primary' />
     </div>
   );
 }

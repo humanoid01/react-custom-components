@@ -1,5 +1,11 @@
 @import '../../colors/colors.scss';
 
+:root {
+  --outlined-color: $primary;
+  --contained-color: $primary;
+  --text-color: $primary;
+}
+
 .buttonWrapper {
   position: relative;
   display: inline-flex;
@@ -10,10 +16,8 @@
   border: none;
   outline: none;
   line-height: inherit;
-  user-select: none;
   overflow: visible;
   vertical-align: middle;
-  background-color: $primary-dark;
   margin: 2px;
 
   .startIcon,
@@ -31,16 +35,33 @@
   }
 
   &.small {
-    height: 32px;
-    padding: 5px 10px;
+    padding: 8px 20px;
   }
   &.medium {
-    height: 32px;
-
-    padding: 7px 12px;
+    padding: 12px 30px;
   }
   &.large {
-    height: 32px;
-    padding: 10px 15px;
+    padding: 16px 40px;
+  }
+
+  &.outlined {
+    border: 2px solid var(--outlined-color);
+    border-radius: 8px;
+    color: var(--outlined-color);
+    background-color: transparent;
+  }
+
+  &.contained {
+    border-radius: 8px;
+    border: 2px solid var(--contained-color);
+    color: white;
+    background-color: var(--contained-color);
+  }
+
+  &.text {
+    border-radius: 8px;
+    border: none;
+    color: var(--text-color);
+    background-color: transparent;
   }
 }

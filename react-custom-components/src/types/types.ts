@@ -16,5 +16,4 @@ export type ColorType =
   | 'successDark'
   | 'warning'
   | 'warningLight'
-  | 'warningDark'
-  | string;
+  | 'warningDark';

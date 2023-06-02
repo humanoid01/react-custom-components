@@ -10,14 +10,15 @@ function App() {
   const style = { height: '100px', padding: '10px' };
   return (
     <div style={style}>
-      <Button variant='contained' color='primaryDark' />
+      <Button variant='contained' color='primaryDark' size='large' />
       <Button
         endIcon={<AiFillAlert />}
         startIcon={<AiFillEyeInvisible />}
         variant='outlined'
-        color='red'
+        color='successDark'
+        size='large'
       />
-      <Button variant='text' color='primary' />
+      <Button variant='text' color='primary' size='large' />
     </div>
   );
 }

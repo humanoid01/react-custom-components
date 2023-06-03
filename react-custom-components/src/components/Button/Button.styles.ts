@@ -5,6 +5,7 @@ interface BtnProps {
   size?: string;
   variant?: string;
   color?: string;
+  disabled?: boolean;
 }
 
 interface VariantStyles {
@@ -77,11 +78,18 @@ export const Btn = styled.div<BtnProps>`
   overflow: visible;
   vertical-align: middle;
   margin: 2px;
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? 'default' : 'pointer')};
+  pointer-events: ${props => (props.disabled ? 'none' : 'all')};
   padding: ${props => selectSize(props.size)};
   background-color: ${props => selectStyle(props).backgroundColor};
-  border: ${props => selectStyle(props).border};
-  color: ${props => selectStyle(props).color};
+  border: ${props => {
+    if (props.disabled) return 'gray';
+    return selectStyle(props).border;
+  }};
+  color: ${props => {
+    if (props.disabled) return 'gray';
+    return selectStyle(props).color;
+  }};
   :hover {
     background-color: ${props => selectStyle(props).hover.backgroundColor};
   }

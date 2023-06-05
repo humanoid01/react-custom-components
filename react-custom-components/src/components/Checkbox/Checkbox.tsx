@@ -1,6 +1,10 @@
 import { ReactNode } from 'react';
 import { ColorType, Size } from '../../types/types';
-import { CheckboxInput, IcnCheckbox, IcnContainer } from './Checkbox.styles';
+import {
+  CheckboxInput,
+  IcnCheckbox,
+  CheckboxContainer,
+} from './Checkbox.styles';
 import { css } from '@emotion/react';
 
 interface CheckboxProps {
@@ -26,9 +30,8 @@ export const Checkbox = ({
   label,
   size,
 }: CheckboxProps) => {
-  const inputSize = size;
   return (
-    <IcnContainer
+    <CheckboxContainer
       css={css`
         display: inline-flex;
         align-items: center;
@@ -41,6 +44,7 @@ export const Checkbox = ({
           color={color}
           onChange={onChange}
           style={style}
+          size={size}
         />
       ) : (
         <CheckboxInput
@@ -48,11 +52,11 @@ export const Checkbox = ({
           checked={checked}
           onChange={onChange}
           color={color}
-          inputSize={inputSize}
+          inputSize={size}
         />
       )}
       <span>{label}</span>
-    </IcnContainer>
+    </CheckboxContainer>
   );
 };
 const IconCheckbox = ({
@@ -62,9 +66,14 @@ const IconCheckbox = ({
   color,
   onChange,
   style,
+  size,
 }: CheckboxProps) => {
   return (
-    <IcnCheckbox onClick={onChange} color={color} style={style}>
+    <IcnCheckbox
+      onClick={onChange}
+      color={color}
+      style={style}
+      inputSize={size}>
       {checked ? checkedIcon : icon}
     </IcnCheckbox>
   );

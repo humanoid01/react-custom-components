@@ -20,6 +20,7 @@ function App() {
         color='infoDark'
         style={{ color: 'black' }}
         label='hullo'
+        size='medium'
       />
       <Checkbox
         checked={checked}
@@ -27,7 +28,7 @@ function App() {
         color='infoDark'
         style={{ color: 'black' }}
         label='hullo'
-        size='large'
+        size='medium'
       />
     </div>
   );

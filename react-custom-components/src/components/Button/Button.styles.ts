@@ -82,10 +82,7 @@ export const Btn = styled.div<BtnProps>`
   pointer-events: ${props => (props.disabled ? 'none' : 'all')};
   padding: ${props => selectSize(props.size)};
   background-color: ${props => selectStyle(props).backgroundColor};
-  border: ${props => {
-    if (props.disabled) return 'gray';
-    return selectStyle(props).border;
-  }};
+  border: ${props => selectStyle(props).border};
   color: ${props => {
     if (props.disabled) return 'gray';
     return selectStyle(props).color;

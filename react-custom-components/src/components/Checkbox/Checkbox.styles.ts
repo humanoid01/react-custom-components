@@ -4,6 +4,7 @@ import { getColor } from './../../utils/utils';
 
 interface IcnCheckboxProps {
   color?: ColorType;
+  inputSize?: Size;
 }
 
 interface CheckboxInputProps {
@@ -17,27 +18,34 @@ function modifyHexOpacity(hex: string, opacity: number): string {
   return `#${modifiedHex}`;
 }
 
-const selectSize = (size: Size): string => {
-  return '';
+const selectSize = (size: Size | undefined): string => {
+  if (size === 'small') return '20px';
+  if (size === 'medium') return '30px';
+
+  return '40px';
 };
 
 export const IcnCheckbox = styled.div<IcnCheckboxProps>`
-  font-size: 40px;
+  font-size: ${({ inputSize }) => selectSize(inputSize)};
   border-radius: 50%;
   cursor: pointer;
   display: inline-flex;
-  padding: 16px;
+  padding: 6px;
+  margin-right: 10px;
   color: ${({ color }) => getColor(color)};
   :hover {
     background-color: ${({ color }) => modifyHexOpacity(getColor(color), 0.15)};
   }
 `;
-export const IcnContainer = styled.div`
+export const CheckboxContainer = styled.div`
   display: inline-flex;
   align-items: center;
+  margin: 4px;
+  justify-content: center;
 `;
 
 export const CheckboxInput = styled.input<CheckboxInputProps>`
-  transform: scale(3);
+  width: ${({ inputSize }) => selectSize(inputSize)};
+  height: ${({ inputSize }) => selectSize(inputSize)};
   margin-right: 16px;
 `;

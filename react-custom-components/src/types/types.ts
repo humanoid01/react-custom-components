@@ -17,3 +17,5 @@ export type ColorType =
   | 'warning'
   | 'warningLight'
   | 'warningDark';
+
+export type Size = 'small' | 'medium' | 'large';

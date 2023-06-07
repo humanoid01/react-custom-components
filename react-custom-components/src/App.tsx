@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { AiOutlineAlert } from 'react-icons/ai';
 import { AiFillAlert } from 'react-icons/ai';
 import { Checkbox } from './components/Checkbox/Checkbox';
+import { RadioButton } from './components/RadioButton/RadioButton';
 
 // import { Button } from './components/Button/Button';
 function App() {
@@ -11,26 +12,29 @@ function App() {
   // const [text2, setText2] = useState('');
   const [checked, setChecked] = useState(false);
   return (
-    <div>
-      <Checkbox
-        icon={<AiOutlineAlert />}
-        checkedIcon={<AiFillAlert />}
-        checked={checked}
-        onChange={e => setChecked(!checked)}
-        color='infoDark'
-        style={{ color: 'black' }}
-        label='hullo'
-        size='medium'
-      />
-      <Checkbox
-        checked={checked}
-        onChange={() => setChecked(!checked)}
-        color='infoDark'
-        style={{ color: 'black' }}
-        label='hullo'
-        size='medium'
-      />
-    </div>
+    <>
+      <div>
+        <Checkbox
+          icon={<AiOutlineAlert />}
+          checkedIcon={<AiFillAlert />}
+          checked={checked}
+          onChange={e => setChecked(!checked)}
+          color='infoDark'
+          style={{ color: 'black' }}
+          label='hullo'
+          size='medium'
+        />
+        <Checkbox
+          checked={checked}
+          onChange={() => setChecked(!checked)}
+          color='infoDark'
+          style={{ color: 'black' }}
+          label='hullo'
+          size='medium'
+        />
+      </div>
+      <RadioButton />
+    </>
   );
 }
 

@@ -11,6 +11,11 @@ function App() {
   // const [text, setText] = useState('');
   // const [text2, setText2] = useState('');
   const [checked, setChecked] = useState(false);
+
+  const style = {
+    height: '50px',
+    width: '50px',
+  };
   return (
     <>
       <div>
@@ -33,7 +38,11 @@ function App() {
           size='medium'
         />
       </div>
-      <RadioButton />
+      <div style={{ display: 'flex' }}>
+        <RadioButton label='Regular radio' size='small' />
+        <RadioButton label='Regular radio' size='medium' />
+        <RadioButton label='Regular radio' size='large' />
+      </div>
     </>
   );
 }

@@ -1,5 +1,23 @@
-import { InputRadio } from './RadioButton.styles';
+import { Size } from '../../types/types';
+import { InputRadio, InputRadioWrapper } from './RadioButton.styles';
+import { useId } from 'react';
 
-export const RadioButton = () => {
-  return <InputRadio type='radio' />;
+export interface Style {
+  [key: string]: string;
+}
+
+interface RadioButtonProps {
+  label?: string;
+  size?: Size;
+  style?: Style;
+}
+
+export const RadioButton = ({ label, size, style }: RadioButtonProps) => {
+  const id = useId();
+  return (
+    <InputRadioWrapper inputSize={size} style={style}>
+      <InputRadio id={id} type='radio' inputSize={size} />
+      <label htmlFor={id}>{label}</label>
+    </InputRadioWrapper>
+  );
 };

@@ -23,7 +23,7 @@ function App() {
           icon={<AiOutlineAlert />}
           checkedIcon={<AiFillAlert />}
           checked={checked}
-          onChange={e => setChecked(!checked)}
+          onChange={() => setChecked(!checked)}
           color='infoDark'
           style={{ color: 'black' }}
           label='hullo'
@@ -38,10 +38,16 @@ function App() {
           size='medium'
         />
       </div>
-      <div style={{ display: 'flex' }}>
-        <RadioButton label='Regular radio' size='small' />
-        <RadioButton label='Regular radio' size='medium' />
-        <RadioButton label='Regular radio' size='large' />
+      <div style={{ display: 'flex', backgroundColor: 'green' }}>
+        <RadioButton
+          label='Regular radio'
+          size='small'
+          name='asd'
+          value='10'
+          onChange={e => alert(e.target.value)}
+        />
+        <RadioButton label='Regular radio' size='medium' name='asd' value='3' />
+        <RadioButton label='Regular radio' size='large' name='asd' value='1' />
       </div>
     </>
   );
